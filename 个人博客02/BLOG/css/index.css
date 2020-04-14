@@ -1,0 +1,93 @@
+*{
+    transition: all 300ms;
+}
+body {
+    background: rgb(243, 246, 247);
+}
+
+.navbar {
+    border-radius: 0;
+}
+
+.glyphicon-search {
+    color: #ddd
+}
+
+form[role="search"] {
+    border-radius: 5px;
+    background: #fff;
+    border: 1px solid #ddd;
+}
+
+.btn-search {
+    right: 0;
+    border: none;
+    outline: none;
+    background: rgba(0, 0, 0, 0);
+}
+
+.btn-search:focus {
+    box-shadow: none;
+    border: none;
+    outline: none;
+}
+
+form[role="search"] .form-control {
+    border: none;
+    outline: none;
+    background: none;
+}
+
+form[role="search"] .form-control:focus {
+    box-shadow: none
+}
+
+
+@media (max-width: 768px) {
+    form[role="search"] {
+        padding: 0;
+        height: 45px;
+        width: 95%;
+        margin: 0 auto;
+    }
+
+    form[role="search"] input {
+        background: #000;
+        height: 45px;
+        line-height: 45px;
+        width: 90%;
+    }
+
+    form[role="search"] span {
+        display: inline-block;
+        width: 10%;
+        margin-top: 5px;
+    }
+}
+
+.user{
+    width:96%;
+    min-width:250px;
+    background: #fff;
+    overflow: hidden;
+    margin:0 auto;
+}
+
+.face{
+    width:100px;
+    margin:25px auto;
+}
+
+.fff{
+    background: #fff;
+    overflow: hidden;
+    padding:10px 0;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+
+.fff .panel-footer{
+   background: none;
+   border-top: none
+}

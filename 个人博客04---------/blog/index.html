@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拾贰BLOG</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script type="text/javascript" src="js/mock.js"></script>
+</head>
+
+<body>
+    <header id="header"></header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="user">
+                    <div class="face"><img src="images/1.jpg" class="img-responsive img-circle img-thumbnail"
+                            alt="Cinque Terre"></div>
+                    <h4 class="text-center">jiagejia</h4>
+                    <p class="col-md-12">
+                        　　欲善其事，必先利其器。大学几年，我始终坚持天道酬勤的原则，一日三省，自信品格的日趋完善;勇于行事，务实求新，自信工作有所成绩;三更灯火，寒窗苦读，相信学有所成。
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-9" id="news">
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/moc.js"></script>
+    <script src="js/model.js"></script>
+    <script>
+        $.ajax({
+            url: 'http://api.hzbiz.net/0103/api/blogs.php',
+            type: 'get',
+            dataType: 'json',
+            success: function (data) {
+                let blogs = data.blogs
+                $.each(blogs, function (index, value) {
+                    var textNode = `
+                        <div class="fff">
+                                <div class="col-md-4">
+                                <img src="${value.url}" class="img-responsive img-thumbnail" alt="Cinque Terre">
+                            </div>
+                            <div class="col-md-8">
+                            <div class="panel">
+                            <div class="panel-heading">
+                                    <h2><a href="blogShow.html?blogID=${value.id}">${value.title}</a></h2>
+                            </div>
+                            <div class="panel-body">
+                                ${value.body}
+                            </div>
+                            <div class="panel-footer">
+                                <a href="#">${value.username}</a>
+                                <a href="#">${value.city}</a>
+                                <a href="#">${value.ctime}</a>
+                            </div>
+                        </div>
+                            </div>
+                        </div>
+                      `  
+                    $('#news').append($(textNode))
+                })
+
+            }
+        })
+    </script>
+
+</body>
+
+</html>

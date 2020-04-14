@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拾贰</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script type="text/javascript" src="js/mock.js"></script>
+</head>
+
+<body>
+    <header id="header"></header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12" id="news">
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/moc.js"></script>
+    <script src="js/model.js"></script>
+   
+   
+    <script>
+        $.get('http://localhost/api/blogs.php',{
+            id:getUrlName().blogID
+        },function(res){
+
+            let data = $.parseJSON(res)
+            var element = data.blogs[0];
+            console.log(element)
+                   var textNode = `
+                       <div class="fff">
+                           <div class="col-md-12">
+                           <div class="panel">
+                           <div class="panel-heading">
+                                   <h2><a href="blogShow.html?blogID=${element.id}">${element.title}</a></h2>
+                           </div>
+                           <div class="panel-body">
+                               <p><img src="${element.url}" class="img-responsive img-thumbnail" alt="Cinque Terre"></p>
+                               ${element.body}
+                           </div>
+                           <div class="panel-footer">
+                               <a href="#">${element.name}</a>
+                               <a href="#">${element.city}</a>
+                               <a href="#">${element.ctime}</a>
+                           </div>
+                       </div>
+                           </div>
+                       </div>
+                     `  
+                     $('#news').append($(textNode))
+         
+      
+        })
+
+   </script>
+
+
+
+</body>
+
+</html>

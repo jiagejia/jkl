@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拾贰BLOG - 发布文章</title>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <style>
+        .upImages {
+            position: relative;
+            width: 150px;
+            height: 150px;
+
+        }
+
+        .upload {
+            cursor: pointer;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 1px solid #ddd;
+            opacity: 0;
+        }
+
+        .upImages img {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <header id="header"></header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <h1 class="page-header">写文章</h1>
+                <form role="form" id="postNews">
+                    <div class="form-group">
+                        <label for="name">名称</label>
+                        <input type="text" class="form-control" name="title" placeholder="请输入名称">
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="upImages">
+                                    <input type="file" class="upload" name="url" id="uploadFile" placeholder="上传图片">
+                                    <img src="../images/111.jpg" id="imgShow" alt="">
+                                    <input type="hidden" id="base64Img">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="">内容</label>
+                        <textarea class="form-control" name="body" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="name">发布者</label>
+                                <input type="text" class="form-control" name="username" placeholder="作者">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="name">发布时间</label>
+                                <input type="datetime-local" class="form-control" name="ctime" placeholder="时间">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="name">发布者的城市</label>
+                                <input type="text" class="form-control" name="city" placeholder="城市">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-default">提交</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/jquery.js"></script>
+    <script src="../js/bootstrap.js"></script>
+    <script src="../js/model.js"></script>
+
+    <script>
+
+        $('#uploadFile').change(function () {
+            let file = $(this)[0].files[0];
+            let reader = new FileReader();
+            reader.onload = function () {
+                var imgFile = this.result.substring(this.result.indexOf(',') + 1)
+                console.log(imgFile)
+                $('#imgShow').attr('src', this.result)
+                $('#base64Img').val(this.result)
+                console.log(this.result)
+            }
+            reader.readAsDataURL(file)  
+        })
+
+
+
+        $('#postNews').on('submit', function (e) {
+            e.preventDefault();
+            $.post('http://api.hzbiz.net/0103/api/postNews.php', {
+                title: $('[name="title"]').val(),
+                body: $('[name="body"]').val(),
+                ctime: $('[name="ctime"]').val(),
+                city: $('[name="city"]').val(),
+                username: $('[name="username"]').val(),
+                url: $('#base64Img').val()
+            }, function (res) {
+                console.log(res)
+            })
+        })
+    </script>
+</body>
+
+</html>
